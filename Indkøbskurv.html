@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indkøbskurv - LuLu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Images/favicon-32x32.png">
+</head>
+
+<body>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo-link">
+            <img src="Images/Images:Logo.png" alt="LuLu logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Forside</a></li>
+                <li><a href="about.html">Oplysninger</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="Indkøbskurv.html" class="active">Kurv</a></li>
+                <li><a href="Betaling.html">Betaling</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- KURV SECTION -->
+    <main class="cart-container">
+        <h2>Din indkøbskurv</h2>
+
+        <div id="cart-items" class="cart-grid"></div>
+        <h3 id="total"></h3>
+
+        <a href="Betaling.html"><button class="checkout-btn">Gå til betaling</button></a>
+    </main>
+
+    <footer>
+        <p>Lavet af Freja</p>
+    </footer>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartContainer = document.getElementById("cart-items");
+        let total = 0;
+
+        if (cart.length === 0) {
+            cartContainer.innerHTML = "<p>Din kurv er tom.</p>";
+        } else {
+            cart.forEach(item => {
+                const div = document.createElement("div");
+                div.classList.add("cart-item");
+                div.innerHTML = `
+                    <p><strong>${item.name}</strong></p>
+                    <p>${item.price} kr</p>
+                    <button class="remove">Fjern</button>
+                `;
+                cartContainer.appendChild(div);
+                total += item.price;
+            });
+            document.getElementById("total").innerText = "Total: " + total + " kr";
+        }
+
+        document.querySelectorAll(".remove").forEach((btn, index) => {
+            btn.addEventListener("click", () => {
+                cart.splice(index, 1);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                location.reload();
+            });
+        });
+    </script>
+</body>
+
+</html>

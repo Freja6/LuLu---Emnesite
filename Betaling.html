@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betaling - LuLu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Images/favicon-32x32.png">
+</head>
+
+<body>
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo-link">
+            <img src="Images/Images:Logo.png" alt="LuLu logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Forside</a></li>
+                <li><a href="about.html">Oplysninger</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="Indkøbskurv.html">Kurv</a></li>
+                <li><a href="Betaling.html" class="active">Betaling</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- BETALING SECTION -->
+    <main class="payment-container">
+        <h2>Betaling</h2>
+        <form id="payment-form">
+            <div class="form-group">
+                <label for="name">Navn på kort</label>
+                <input type="text" id="name" required placeholder="Dit navn">
+            </div>
+            <div class="form-group">
+                <label for="card">Kortnummer</label>
+                <input type="text" id="card" required placeholder="1234 5678 9012 3456">
+            </div>
+            <div class="form-group">
+                <label for="expiry">Udløbsdato</label>
+                <input type="text" id="expiry" placeholder="MM/ÅÅ" required>
+            </div>
+            <div class="form-group">
+                <label for="cvc">CVC</label>
+                <input type="text" id="cvc" required placeholder="123">
+            </div>
+            <button type="submit" class="checkout-btn">Betal nu</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>Lavet af Freja</p>
+    </footer>
+
+    <script>
+        document.getElementById("payment-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Tak for din betaling! Din ordre er gennemført.");
+            localStorage.removeItem("cart"); // tøm kurven efter betaling
+            window.location.href = "index.html"; // send tilbage til forsiden
+        });
+    </script>
+</body>
+
+</html>
